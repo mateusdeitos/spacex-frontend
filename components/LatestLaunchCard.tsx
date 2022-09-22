@@ -2,7 +2,7 @@ import { Text } from "@mantine/core";
 import { TStaticPropsHomeResponse } from "../pages";
 import { RouteCard } from "./RouteCard";
 
-export const LatestLaunchCard = ({ latest }: Pick<TStaticPropsHomeResponse, "latest">) => {
+export const LatestLaunchCard = ({ flightNumber, missionDate, missionName }: TStaticPropsHomeResponse["latest"]) => {
 	return <RouteCard
 		image={{
 			src: "/latest_launch.jpg",
@@ -11,17 +11,17 @@ export const LatestLaunchCard = ({ latest }: Pick<TStaticPropsHomeResponse, "lat
 		badges={[
 			{
 				color: { from: "orange", to: "red" },
-				text: `Flight: #${latest.flightNumber}`
+				text: `Flight: #${flightNumber}`
 			}
 		]}
 		Title={<Text weight={500}>Latest</Text>}
 		route="/launches/latest"
 	>
 		<Text mt="xs" size="xs" color="dimmed">
-			Mission: {latest.missionName}
+			<Text weight={600}>Mission</Text> {missionName}
 		</Text>
 		<Text mt="xs" size="xs" color="dimmed">
-			Date: {latest.missionDate}
+			<Text weight={600}>Date</Text> {missionDate}
 		</Text>
 	</RouteCard>
 }

@@ -1,8 +1,9 @@
 import { Text, ThemeIcon, Group } from "@mantine/core";
 import { RouteCard } from "./RouteCard";
 import { IconCalendarEvent } from "@tabler/icons";
+import { TStaticPropsHomeResponse } from "../pages";
 
-export const UpcomingLaunchesCard = () => {
+export const UpcomingLaunchesCard = ({ flightsPerMonth: { currentMonth, nextMonth }, totalFlights }: TStaticPropsHomeResponse["upcoming"]) => {
 	return <RouteCard
 		image={{
 			src: "/upcoming_launches.jpg",
@@ -11,41 +12,41 @@ export const UpcomingLaunchesCard = () => {
 		badges={[
 			{
 				color: { from: "dark", to: "gray" },
-				text: "8 flights"
+				text: `${totalFlights} flights`
 			}
 		]}
 		Title={<Text weight={500}>Upcoming</Text>}
 		route="/launches/upcoming"
 	>
 		<Group position="left" mt="xs" spacing="xs">
-			<ThisMonthLaunches />
+			<ThisMonthLaunches total={currentMonth} />
 		</Group>
 		<Group position="left" mt="xs" spacing="xs">
-			<NextMonthLaunches />
+			<NextMonthLaunches total={nextMonth} />
 		</Group>
 	</RouteCard>;
 };
 
 
-const ThisMonthLaunches = () => {
+const ThisMonthLaunches = ({ total }: { total: number }) => {
 	return <>
 		<ThemeIcon size="lg" variant="gradient" gradient={{ from: "dark", to: "blue" }}>
 			<IconCalendarEvent size={20} />
 		</ThemeIcon>
 
 		<Text size="xs" color="cyan">
-			2 this month
+			{total} this month
 		</Text>
 	</>;
 };
-const NextMonthLaunches = () => {
+const NextMonthLaunches = ({ total }: { total: number }) => {
 	return <>
 		<ThemeIcon size="lg" variant="gradient" gradient={{ from: "violet", to: "pink" }}>
 			<IconCalendarEvent size={20} />
 		</ThemeIcon>
 
 		<Text size="xs" color="dimmed">
-			4 next month
+			{total} next month
 		</Text>
 	</>;
 };
