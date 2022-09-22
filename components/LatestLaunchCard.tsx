@@ -1,8 +1,8 @@
 import { Text } from "@mantine/core";
-import { dateUTCToLocalString } from "../utils/date.formatter";
+import { TStaticPropsHomeResponse } from "../pages";
 import { RouteCard } from "./RouteCard";
 
-export const LatestLaunchCard = () => {
+export const LatestLaunchCard = ({ latest }: Pick<TStaticPropsHomeResponse, "latest">) => {
 	return <RouteCard
 		image={{
 			src: "/latest_launch.jpg",
@@ -11,17 +11,17 @@ export const LatestLaunchCard = () => {
 		badges={[
 			{
 				color: { from: "orange", to: "red" },
-				text: "Flight: #185"
+				text: `Flight: #${latest.flightNumber}`
 			}
 		]}
 		Title={<Text weight={500}>Latest</Text>}
 		route="/launches/latest"
 	>
 		<Text mt="xs" size="xs" color="dimmed">
-			Launch name: Starlink 4-34 (v1.5)
+			Mission: {latest.missionName}
 		</Text>
 		<Text mt="xs" size="xs" color="dimmed">
-			Launch date: {dateUTCToLocalString("2022-09-17T01:05:00.000Z")}
+			Date: {latest.missionDate}
 		</Text>
 	</RouteCard>
 }

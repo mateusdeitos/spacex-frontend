@@ -1,4 +1,4 @@
-import { Badge, BadgeProps, Box, Button, Card, Group, Image, Text } from "@mantine/core"
+import { Badge, BadgeProps, Box, Button, Card, Group, Image } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 import { PropsWithChildren, ReactElement } from "react";
 
@@ -26,10 +26,11 @@ export const RouteCard = ({
 
 		return color
 	}
-	return <Card radius="md" p="lg" sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }} >
+	return <Card shadow="lg" withBorder radius="md" p="lg" sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }} >
 		<Card.Section>
 			<Image
-				{...image}
+				src={image.src}
+				alt={image.alt}
 				title={image.alt}
 				height={200}
 			/>
