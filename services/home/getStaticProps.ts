@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import { TStaticPropsHomeResponse } from "../../pages";
 import { ApiTypes } from "../../types/api";
 import { dateUTCToLocalString } from "../../utils/date.formatter";
+import { iterateRequestWithPagination } from "../../utils/request.parsing";
 import { api } from "../api";
 
 export const handler: GetStaticProps<TStaticPropsHomeResponse> = async () => {
@@ -71,8 +72,7 @@ async function fetchNextLaunch(): Promise<ApiTypes.TNextLaunchSummary> {
 
 async function fetchPastLaunch(): Promise<ApiTypes.TPastLaunchSummary> {
 	try {
-		const limit = 100;
-		let offset = 0;
+
 		const pastLaunches: ApiTypes.TPastLaunchSummary = {
 			failedFlights: 0,
 			sucessfulFlights: 0,
@@ -80,31 +80,15 @@ async function fetchPastLaunch(): Promise<ApiTypes.TPastLaunchSummary> {
 			status: "success",
 		};
 
-		while (true) {
-			const { data } = await api.get<ApiTypes.TPaginatedResult<ApiTypes.TRawLaunch>>("/launches/past", {
-				params: {
-					limit,
-					offset,
-				}
-			});
-
-			if (!data?.data?.length) {
-				break;
+		await iterateRequestWithPagination<ApiTypes.TRawLaunch>("/launches/past", (launch) => {
+			if (launch.success) {
+				pastLaunches.sucessfulFlights++;
+			} else {
+				pastLaunches.failedFlights++;
 			}
 
-			data.data.forEach((launch: ApiTypes.TRawLaunch) => {
-				if (launch.success) {
-					pastLaunches.sucessfulFlights++;
-				} else {
-					pastLaunches.failedFlights++;
-				}
-
-				pastLaunches.totalFlights++;
-			});
-
-			offset += limit;
-
-		}
+			pastLaunches.totalFlights++;
+		});
 
 		return pastLaunches;
 	} catch (error) {
@@ -119,8 +103,7 @@ async function fetchPastLaunch(): Promise<ApiTypes.TPastLaunchSummary> {
 
 async function fetchUpcomingLaunch(): Promise<ApiTypes.TUpcomingLaunchSummary> {
 	try {
-		const limit = 100;
-		let offset = 0;
+
 		const upcommingLaunches: ApiTypes.TUpcomingLaunchSummary = {
 			totalFlights: 0,
 			flightsPerMonth: {
@@ -136,32 +119,18 @@ async function fetchUpcomingLaunch(): Promise<ApiTypes.TUpcomingLaunchSummary> {
 		const isCurrentMonth = (date: Date) => date.getMonth() === currentMonth;
 		const isNextMonth = (date: Date) => date.getMonth() === nextMonth;
 
-		while (true) {
-			const { data } = await api.get<ApiTypes.TPaginatedResult<ApiTypes.TRawLaunch>>("/launches/upcoming", {
-				params: {
-					limit,
-					offset,
-				}
-			});
-
-			if (!data?.data?.length) {
-				break;
-			}
-
-			data.data.forEach((launch: ApiTypes.TRawLaunch) => {
+		await iterateRequestWithPagination<ApiTypes.TRawLaunch>("/launches/upcoming", (launch) => {
+			if (!!launch?.date_utc) {
 				const date = new Date(launch.date_utc);
 				if (isCurrentMonth(date)) {
 					upcommingLaunches.flightsPerMonth.currentMonth++;
 				} else if (isNextMonth(date)) {
 					upcommingLaunches.flightsPerMonth.nextMonth++;
 				}
+			}
 
-				upcommingLaunches.totalFlights++;
-			});
-
-			offset += limit;
-
-		}
+			upcommingLaunches.totalFlights++;
+		});
 
 		return upcommingLaunches;
 	} catch (error) {
