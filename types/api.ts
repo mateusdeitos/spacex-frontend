@@ -5,13 +5,38 @@ export namespace ApiTypes {
 		status: "error" | "success";
 	}
 
+	export type TLaunchDetails = TStatusResponseType<{
+		id: string;
+		missionName: string;
+		missionDate: string;
+		flightNumber: number;
+		details: string;
+		crew: TRawLaunch["crew"];
+		failure: TRawLaunch["failures"]
+		media: {
+			reddit: {
+				campaign: string;
+				launch: string;
+				media: string;
+				recovery: string;
+			},
+			youTube: {
+				videoId: string;
+			}
+		},
+		rocketId: string;
+		sucessfull: boolean;
+	}>
+
 	export type TLatestLaunchSummary = TStatusResponseType<{
+		id: string;
 		missionName: string;
 		missionDate: string;
 		flightNumber: number;
 	}>
 
 	export type TNextLaunchSummary = TStatusResponseType<{
+		id: string;
 		missionName: string;
 		missionDate: string;
 		flightNumber: number;
@@ -33,6 +58,7 @@ export namespace ApiTypes {
 
 	// Achar uma forma de reaproveitar o type do backend
 	export type TRawLaunch = {
+		"id": string;
 		"flight_number": number,
 		"name": string,
 		"date_utc": string,
@@ -46,13 +72,11 @@ export namespace ApiTypes {
 		"window"?: number,
 		"rocket"?: string,
 		"success"?: boolean,
-		"failures": [
-			{
-				"time": number,
-				"altitude": number,
-				"reason": string,
-			},
-		],
+		"failures": Array<{
+			"time": number,
+			"altitude": number,
+			"reason": string,
+		}>,
 		"upcoming": boolean,
 		"details"?: string,
 		"fairings": {
@@ -61,12 +85,12 @@ export namespace ApiTypes {
 			"recovered"?: boolean,
 			"ships": string[]
 		},
-		"crew": [
+		"crew": Array<
 			{
 				"crew"?: string
 				"role"?: string
 			}
-		],
+		>,
 		"ships": string[],
 		"capsules": string[],
 		"payloads": string[],

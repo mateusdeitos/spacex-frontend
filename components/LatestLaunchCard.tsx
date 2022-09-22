@@ -2,7 +2,7 @@ import { Text } from "@mantine/core";
 import { TStaticPropsHomeResponse } from "../pages";
 import { RouteCard } from "./RouteCard";
 
-export const LatestLaunchCard = ({ flightNumber, missionDate, missionName }: TStaticPropsHomeResponse["latest"]) => {
+export const LatestLaunchCard = ({ flightNumber, missionDate, missionName, id }: TStaticPropsHomeResponse["latest"]) => {
 	return <RouteCard
 		image={{
 			src: "/latest_launch.jpg",
@@ -15,7 +15,7 @@ export const LatestLaunchCard = ({ flightNumber, missionDate, missionName }: TSt
 			}
 		]}
 		Title={<Text weight={500}>Latest</Text>}
-		route="/launches/latest"
+		route={`/launches/${id}`}
 	>
 		<Text mt="xs" size="xs" color="dimmed">
 			<Text weight={600}>Mission</Text> {missionName}

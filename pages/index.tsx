@@ -16,7 +16,7 @@ export type TStaticPropsHomeResponse = {
 
 export default function Home({ latest, next, past, upcoming }: TStaticPropsHomeResponse) {
 	return (
-		<PageShell>
+		<PageShell pageTitle="Launches">
 			<SimpleGrid
 				cols={4}
 				spacing="md"
