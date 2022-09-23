@@ -20,7 +20,7 @@ export function LaunchCard({
 	success,
 	type,
 }: TLaunchCardProps) {
-	return <Card component={NextLink} href={`/launches/${id}`} sx={(theme) => ({
+	return <Card component={NextLink} prefetch={false} href={`/launches/${id}`} sx={(theme) => ({
 		display: "flex",
 		flexDirection: "column",
 		justifyContent: "space-between",
