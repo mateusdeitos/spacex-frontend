@@ -8,7 +8,7 @@ import { LaunchCard } from "../../../components/ListPage/LaunchCard";
 import { PageShell } from "../../../components/PageShell";
 import { ApiTypes } from "../../../types/api";
 
-type TListType = "upcoming" | "past";
+export type TListType = "upcoming" | "past";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -82,7 +82,7 @@ const List = ({ type }: { type: TListType }) => {
 			{isSuccess && (
 				<>
 					{response.data.data.map((r, index) => {
-						return <LaunchCard key={index} {...r} />
+						return <LaunchCard key={index} {...r} type={type} />
 					})}
 				</>
 			)}
