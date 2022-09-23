@@ -53,6 +53,15 @@ export const PageShell = ({ children, FooterChildren, pageTitle, breadcrumbs }: 
 				<Text size="xl" mb="xs" weight={500}>{pageTitle}</Text>
 
 				<Script
+					src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GTAG_ID}`}
+					onLoad={() => {
+						gaHandler('js', new Date());
+
+						gaHandler('config', 'G-SWXW9P4SYN');
+
+					}}
+				/>
+				<Script
 					src={`https://www.googleoptimize.com/optimize.js?id=${process.env.NEXT_PUBLIC_OPTIMIZE_CONTAINER_ID}`}
 				/>
 				<GaProvider value={ga}>
@@ -76,7 +85,7 @@ function throwIfSSR() {
 	throw new Error('Using GA during SSR is not allowed')
 }
 
-function gaHandler() {
+function gaHandler(...args: any[]) {
 	const dataLayer = ((window as any).dataLayer =
 		(window as any).dataLayer || [])
 
