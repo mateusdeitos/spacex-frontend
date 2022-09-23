@@ -1,6 +1,7 @@
 import { Card, Group, Text } from "@mantine/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { PropsWithChildren } from "react";
+import { CrewSection } from "../../components/Details/CrewSection";
 import { PageShell } from "../../components/PageShell";
 import { fetchLatestLaunch, fetchLaunchDetails, fetchNextLaunch } from "../../services/requests";
 import { ApiTypes } from "../../types/api";
@@ -38,11 +39,7 @@ const CardComponent = ({ ...props }: ApiTypes.TLaunchDetails) => {
 		<CardSection isLast>
 			<CardSectionHeader title="Crew" />
 			{!props.crew.length ? <Text>No crew members</Text> : (
-				<Group spacing="xl">
-					{props.crew.map((crewMember, index) => (
-						<CardSectionInfo key={index} title="Role" value={crewMember.role} />
-					))}
-				</Group>
+				<CrewSection crew={props.crew} />
 			)}
 		</CardSection>
 	</Card>
