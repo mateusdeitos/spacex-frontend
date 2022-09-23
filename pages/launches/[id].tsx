@@ -71,9 +71,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		fetchNextLaunch(),
 	]);
 
-	console.log(launches);
 	return {
-		paths: launches.map(({ id }) => ({ params: { id: id || "404" } })),
+		paths: launches.map(({ id }) => ({ params: { id } })),
 		fallback: 'blocking'
 	}
 }
