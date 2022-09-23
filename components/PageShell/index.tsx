@@ -2,8 +2,10 @@ import { ActionIcon, Anchor, AppShell, Box, Breadcrumbs, Button, Footer, Header,
 import { NextLink } from "@mantine/next";
 import { IconMoon, IconSun } from "@tabler/icons";
 import Link from "next/link";
+import Script from "next/script";
 import { PropsWithChildren } from "react";
 import { useAppContext } from "../../context/AppContext";
+import { GaProvider } from "../../services/optimize/useGa";
 import { PageShellProvider } from "./context";
 
 interface IPageShellProps {
@@ -13,9 +15,9 @@ interface IPageShellProps {
 }
 
 export const PageShell = ({ children, FooterChildren, pageTitle, breadcrumbs }: PropsWithChildren<IPageShellProps>) => {
+	const ga = typeof window === 'undefined' ? throwIfSSR : gaHandler
 	const theme = useMantineTheme();
 	return <PageShellProvider>
-
 		<AppShell
 			styles={{
 				main: {
@@ -28,12 +30,12 @@ export const PageShell = ({ children, FooterChildren, pageTitle, breadcrumbs }: 
 				</Footer> : null
 			}
 			header={
-				<Header height={70} p="xs">
+				< Header height={70} p="xs" >
 					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: "space-between", height: '100%', maxWidth: 980, margin: "0 auto" }}>
 						<Text component={NextLink} href="/" size="xl" weight={500}>API SpaceXplorer</Text>
 						<ThemeToggler />
 					</Box>
-				</Header>
+				</Header >
 			}
 		>
 			<Box style={{ margin: "0 auto", maxWidth: 980 }}>
@@ -49,11 +51,17 @@ export const PageShell = ({ children, FooterChildren, pageTitle, breadcrumbs }: 
 					})}
 				</Breadcrumbs>}
 				<Text size="xl" mb="xs" weight={500}>{pageTitle}</Text>
-				{children}
-			</Box>
-		</AppShell>
 
-	</PageShellProvider>
+				<Script
+					src={`https://www.googleoptimize.com/optimize.js?id=${process.env.NEXT_PUBLIC_OPTIMIZE_CONTAINER_ID}`}
+				/>
+				<GaProvider value={ga}>
+					{children}
+				</GaProvider>
+			</Box>
+		</AppShell >
+
+	</PageShellProvider >
 }
 
 const ThemeToggler = () => {
@@ -62,4 +70,15 @@ const ThemeToggler = () => {
 	return <ActionIcon onClick={toggleTheme} title="Toggle theme" style={{ cursor: "pointer" }}>
 		{theme === 'dark' ? <IconSun color="orange" size={20} /> : <IconMoon color="blue" size={20} />}
 	</ActionIcon>
+}
+
+function throwIfSSR() {
+	throw new Error('Using GA during SSR is not allowed')
+}
+
+function gaHandler() {
+	const dataLayer = ((window as any).dataLayer =
+		(window as any).dataLayer || [])
+
+	dataLayer.push(arguments)
 }

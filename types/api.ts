@@ -5,13 +5,24 @@ export namespace ApiTypes {
 		status: "error" | "success";
 	}
 
-	export type TLaunchDetails = TStatusResponseType<{
+	export type TCrewDetails = {
+		name: string;
+		agency: string;
+		image: string;
+		wikipedia: string;
+		launches: string[];
+		status: string;
+		id: string;
+		role: string;
+	}
+
+	export type TLaunchDetails = {
 		id: string;
 		missionName: string;
 		missionDate: string;
 		flightNumber: number;
 		details: string;
-		crew: TRawLaunch["crew"];
+		crew: TCrewDetails[];
 		failure: TRawLaunch["failures"]
 		media: {
 			reddit: {
@@ -26,7 +37,7 @@ export namespace ApiTypes {
 		},
 		rocketId: string;
 		sucessfull: boolean;
-	}>
+	}
 
 	export type TListLaunchSummary = {
 		id: string;

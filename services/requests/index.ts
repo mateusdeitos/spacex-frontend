@@ -26,59 +26,9 @@ export async function fetchLatestLaunch(): Promise<ApiTypes.TLatestLaunchSummary
 }
 
 export async function fetchLaunchDetails(id: string): Promise<ApiTypes.TLaunchDetails> {
-	const fallbackValues: ApiTypes.TLaunchDetails = {
-		id: "",
-		crew: [],
-		details: "",
-		failure: [],
-		flightNumber: 0,
-		media: {
-			reddit: {
-				campaign: "",
-				launch: "",
-				media: "",
-				recovery: "",
-			},
-			youTube: {
-				videoId: "",
-			},
-		},
-		missionDate: "",
-		missionName: "",
-		rocketId: "",
-		sucessfull: false,
-		status: "error",
-	}
+	const { data } = await api.get<ApiTypes.TLaunchDetails>(`/launches/one/${id}`);
 
-	try {
-		const { data } = await api.get<ApiTypes.TRawLaunch>(`/launches/one/${id}`);
-
-		return {
-			id: data?.id ?? fallbackValues.id,
-			crew: data?.crew ?? fallbackValues.crew,
-			details: data?.details ?? fallbackValues.details,
-			failure: data?.failures ?? fallbackValues.failure,
-			flightNumber: data?.flight_number ?? fallbackValues.flightNumber,
-			media: {
-				reddit: {
-					campaign: data?.links?.reddit?.campaign ?? fallbackValues.media.reddit.campaign,
-					launch: data?.links?.reddit?.launch ?? fallbackValues.media.reddit.launch,
-					media: data?.links?.reddit?.media ?? fallbackValues.media.reddit.media,
-					recovery: data?.links?.reddit?.recovery ?? fallbackValues.media.reddit.recovery,
-				},
-				youTube: {
-					videoId: data?.links?.youtube_id ?? fallbackValues.media.youTube.videoId,
-				},
-			},
-			missionDate: data?.date_utc ? dateUTCToLocalString(data?.date_utc) : fallbackValues.missionDate,
-			missionName: data?.name ?? fallbackValues.missionName,
-			rocketId: data?.rocket ?? fallbackValues.rocketId,
-			sucessfull: data?.success ?? fallbackValues.sucessfull,
-			status: "error",
-		};
-	} catch (error) {
-		return fallbackValues;
-	}
+	return data;
 }
 
 export async function fetchNextLaunch(): Promise<ApiTypes.TNextLaunchSummary> {
