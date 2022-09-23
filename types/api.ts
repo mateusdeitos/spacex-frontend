@@ -28,6 +28,15 @@ export namespace ApiTypes {
 		sucessfull: boolean;
 	}>
 
+	export type TListLaunchSummary = {
+		id: string;
+		missionName: string;
+		missionDate: string;
+		flightNumber: number;
+		success: boolean;
+		hasVideo: boolean;
+	}
+
 	export type TLatestLaunchSummary = TStatusResponseType<{
 		id: string;
 		missionName: string;

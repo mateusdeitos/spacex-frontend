@@ -16,7 +16,7 @@ export const UpcomingLaunchesCard = ({ flightsPerMonth: { currentMonth, nextMont
 			}
 		]}
 		Title={<Text weight={500}>Upcoming</Text>}
-		route="/launches/upcoming"
+		route="/launches/list/upcoming"
 	>
 		<Group position="left" mt="xs" spacing="xs">
 			<ThisMonthLaunches total={currentMonth} />

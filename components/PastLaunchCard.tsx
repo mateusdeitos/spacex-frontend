@@ -40,7 +40,7 @@ export const PastLaunchCard = ({ failedFlights, sucessfulFlights, totalFlights }
 			}
 		]}
 		Title={<Text weight={500}>Past</Text>}
-		route="/launches/past"
+		route="/launches/list/past"
 	>
 		<Group position="left" mt="xs" spacing="xs">
 			<SuccessfulLaunches total={sucessfulFlights} />

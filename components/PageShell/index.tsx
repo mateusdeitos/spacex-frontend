@@ -1,4 +1,5 @@
 import { ActionIcon, Anchor, AppShell, Box, Breadcrumbs, Button, Footer, Header, Text, useMantineTheme } from "@mantine/core";
+import { NextLink } from "@mantine/next";
 import { IconMoon, IconSun } from "@tabler/icons";
 import Link from "next/link";
 import { PropsWithChildren } from "react";
@@ -28,26 +29,26 @@ export const PageShell = ({ children, FooterChildren, pageTitle, breadcrumbs }: 
 			}
 			header={
 				<Header height={70} p="xs">
-					<div style={{ display: 'flex', alignItems: 'center', justifyContent: "space-between", height: '100%', maxWidth: 980, margin: "0 auto" }}>
-						<Text size="xl" weight={500}>API SpaceXplorer</Text>
+					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: "space-between", height: '100%', maxWidth: 980, margin: "0 auto" }}>
+						<Text component={NextLink} href="/" size="xl" weight={500}>API SpaceXplorer</Text>
 						<ThemeToggler />
-					</div>
+					</Box>
 				</Header>
 			}
 		>
 			<Box style={{ margin: "0 auto", maxWidth: 980 }}>
-				<Text size="xl" mb="xs" weight={500}>{pageTitle}</Text>
 				{!!breadcrumbs && <Breadcrumbs>
 					{breadcrumbs.map((item) => {
 						if (item.active) {
-							return <Text key={item.title} color="dimmed">{item.title}</Text>
+							return <Text key={item.title} color="dimmed" sx={{ textTransform: "lowercase" }}>{item.title}</Text>
 						}
 
 						return <Link key={item.href} href={item.href} passHref>
-							<Anchor>{item.title}</Anchor>
+							<Anchor sx={{ textTransform: "lowercase" }}>{item.title}</Anchor>
 						</Link>
 					})}
 				</Breadcrumbs>}
+				<Text size="xl" mb="xs" weight={500}>{pageTitle}</Text>
 				{children}
 			</Box>
 		</AppShell>
