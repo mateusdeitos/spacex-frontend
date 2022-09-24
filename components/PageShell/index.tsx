@@ -52,8 +52,10 @@ export const PageShell = ({ children, FooterChildren, pageTitle, breadcrumbs }: 
 				</Breadcrumbs>}
 				<Text size="xl" mb="xs" weight={500}>{pageTitle}</Text>
 
-				<Script dangerouslySetInnerHTML={{
-					__html: `
+				<Script
+					id="hotjar"
+					dangerouslySetInnerHTML={{
+						__html: `
 					(function(h,o,t,j,a,r){
 						h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
 						h._hjSettings={hjid:${process.env.NEXT_PUBLIC_HOTJAR_ID},hjsv:${process.env.NEXT_PUBLIC_HOTJAR_SV}};
@@ -63,7 +65,7 @@ export const PageShell = ({ children, FooterChildren, pageTitle, breadcrumbs }: 
 						a.appendChild(r);
 					})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
 					`
-				}} />
+					}} />
 				<Script
 					src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GTAG_ID}`}
 					onLoad={() => {
