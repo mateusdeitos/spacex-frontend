@@ -5,7 +5,6 @@ import Link from "next/link";
 import Script from "next/script";
 import { PropsWithChildren } from "react";
 import { useAppContext } from "../../context/AppContext";
-import { GaProvider } from "../../services/optimize/useGa";
 import { PageShellProvider } from "./context";
 
 interface IPageShellProps {

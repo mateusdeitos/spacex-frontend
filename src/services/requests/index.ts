@@ -1,6 +1,6 @@
 import { ApiTypes } from "../../types/api";
-import { dateUTCToLocalString } from "../../utils/date.formatter";
-import { iterateRequestWithPagination } from "../../utils/request.parsing";
+import { dateUTCToLocalString } from "../../../utils/date.formatter";
+import { iterateRequestWithPagination } from "../../../utils/request.parsing";
 import { api } from "../api";
 
 export async function fetchLatestLaunch(): Promise<ApiTypes.TLatestLaunchSummary> {
