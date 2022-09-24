@@ -55,7 +55,6 @@ export namespace ApiTypes {
 		missionName: string;
 		missionDate: string;
 		flightNumber: number;
-		hasCrew: boolean;
 	}
 
 	export type TLatestLaunchSummary = TSingleLaunchSummary;
