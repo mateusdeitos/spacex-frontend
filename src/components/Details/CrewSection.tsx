@@ -2,6 +2,7 @@ import { Anchor, Card, Image, SimpleGrid, Text } from "@mantine/core";
 import { ApiTypes } from "../../types/api";
 
 export const CrewSection = ({ crew }: { crew: ApiTypes.TLaunchDetails["crew"] }) => {
+	if (!crew.length) return <EmptySection />;
 	return <SimpleGrid cols={2} spacing="md" breakpoints={[{ cols: 1, maxWidth: 900 }]}>
 		{crew.map((member, i) => (
 			<CrewMember key={i} {...member} />
@@ -9,6 +10,27 @@ export const CrewSection = ({ crew }: { crew: ApiTypes.TLaunchDetails["crew"] })
 	</SimpleGrid>
 }
 
+export const EmptySection = () => {
+	return <Card shadow="sm" p="md" radius="sm">
+		<Card.Section mb="xl">
+			<Text align="center">No crew members on this mission</Text>
+			<Image
+				p="sm"
+				radius="sm"
+				src="/empty-crew-section.svg"
+				alt="no crew members"
+				title="no crew members"
+				// width="20%"
+				height={300}
+				mx="auto"
+				fit="contain"
+				sx={{
+					".mantine-Image-image": { objectPosition: "top", margin: "0 auto" },
+				}}
+			/>
+		</Card.Section>
+	</Card>
+}
 
 const CrewMember = ({ name, agency, image, role, wikipedia }: ApiTypes.TLaunchDetails["crew"][number]) => {
 	return <Card shadow="sm" p="md" radius="sm" sx={(theme) => ({

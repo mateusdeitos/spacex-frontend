@@ -1,6 +1,6 @@
 import { Group, Text, ThemeIcon } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons";
-import { ApiTypes } from "../types/api";
+import { ApiTypes } from "../../types/api";
 import { RouteCard } from "./RouteCard";
 
 export const UpcomingLaunchesCard = ({ flightsPerMonth: { currentMonth, nextMonth }, totalFlights }: ApiTypes.TUpcomingLaunchSummary) => {

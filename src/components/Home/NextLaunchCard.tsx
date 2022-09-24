@@ -1,20 +1,20 @@
 import { Text } from "@mantine/core";
-import { ApiTypes } from "../types/api";
+import { ApiTypes } from "../../types/api";
 import { RouteCard } from "./RouteCard";
 
-export const LatestLaunchCard = ({ flightNumber, missionDate, missionName, id }: ApiTypes.TLatestLaunchSummary) => {
+export const NextLaunchCard = ({ flightNumber, missionDate, missionName, id }: ApiTypes.TNextLaunchSummary) => {
 	return <RouteCard
 		image={{
-			src: "/latest_launch.jpg",
-			alt: "Latest launch",
+			src: "/next_launch.jpg",
+			alt: "Next launch",
 		}}
 		badges={[
 			{
-				color: { from: "orange", to: "red" },
+				color: { from: "indigo", to: "cyan" },
 				text: `Flight: #${flightNumber}`
-			}
+			},
 		]}
-		Title={<Text weight={500}>Latest</Text>}
+		Title={<Text weight={500}>Next</Text>}
 		route={`/launches/${id}`}
 	>
 		<Text mt="xs" size="xs" color="dimmed">

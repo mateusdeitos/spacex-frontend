@@ -1,9 +1,9 @@
 import { SimpleGrid } from "@mantine/core";
-import { LatestLaunchCard } from "../components/LatestLaunchCard";
-import { NextLaunchCard } from "../components/NextLaunchCard";
+import { LatestLaunchCard } from "../components/Home/LatestLaunchCard";
+import { NextLaunchCard } from "../components/Home/NextLaunchCard";
+import { PastLaunchCard } from "../components/Home/PastLaunchCard";
+import { UpcomingLaunchesCard } from "../components/Home/UpcomingLaunchesCard";
 import { PageShell } from "../components/PageShell";
-import { PastLaunchCard } from "../components/PastLaunchCard";
-import { UpcomingLaunchesCard } from "../components/UpcomingLaunchesCard";
 import { handler } from "../services/home/getStaticProps";
 import { ApiTypes } from "../types/api";
 
