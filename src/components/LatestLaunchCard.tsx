@@ -1,8 +1,8 @@
 import { Text } from "@mantine/core";
-import { TStaticPropsHomeResponse } from "../pages";
+import { ApiTypes } from "../types/api";
 import { RouteCard } from "./RouteCard";
 
-export const LatestLaunchCard = ({ flightNumber, missionDate, missionName, id }: TStaticPropsHomeResponse["latest"]) => {
+export const LatestLaunchCard = ({ flightNumber, missionDate, missionName, id }: ApiTypes.TLatestLaunchSummary) => {
 	return <RouteCard
 		image={{
 			src: "/latest_launch.jpg",

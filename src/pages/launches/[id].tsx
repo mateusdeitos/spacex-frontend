@@ -68,8 +68,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		fetchNextLaunch(),
 	]);
 
+	const paths: Array<{ params: { id: string } }> = [];
+	launches.forEach(launch => {
+		if (launch.status === 'success') {
+			paths.push({ params: { id: launch.id } });
+		}
+	})
+
 	return {
-		paths: launches.map(({ id }) => ({ params: { id } })),
+		paths,
 		fallback: 'blocking'
 	}
 }
@@ -88,9 +95,18 @@ export const getStaticProps: GetStaticProps<ApiTypes.TLaunchDetails> = async ({ 
 	}
 
 	const props = await fetchLaunchDetails(id);
+	if (props.status === 'success') {
+		return {
+			props,
+			revalidate: 120,
+		}
+	}
 
 	return {
-		props,
-		revalidate: 120,
+		notFound: true,
+		redirect: {
+			destination: '/',
+		}
 	}
+
 }

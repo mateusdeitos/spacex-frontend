@@ -8,10 +8,10 @@ import { handler } from "../services/home/getStaticProps";
 import { ApiTypes } from "../types/api";
 
 export type TStaticPropsHomeResponse = {
-	latest: ApiTypes.TLatestLaunchSummary;
-	next: ApiTypes.TNextLaunchSummary;
-	past: ApiTypes.TPastLaunchSummary;
-	upcoming: ApiTypes.TUpcomingLaunchSummary;
+	latest: ApiTypes.TStatusResponseType<ApiTypes.TLatestLaunchSummary>;
+	next: ApiTypes.TStatusResponseType<ApiTypes.TNextLaunchSummary>;
+	past: ApiTypes.TStatusResponseType<ApiTypes.TPastLaunchSummary>;
+	upcoming: ApiTypes.TStatusResponseType<ApiTypes.TUpcomingLaunchSummary>;
 }
 
 export default function Home({ latest, next, past, upcoming }: TStaticPropsHomeResponse) {

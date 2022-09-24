@@ -1,8 +1,10 @@
 
 export namespace ApiTypes {
 
-	type TStatusResponseType<T> = T & {
-		status: "error" | "success";
+	export type TStatusResponseType<T> = T & {
+		status: "success";
+	} | {
+		status: "error";
 	}
 
 	export type TCrewDetails = {
@@ -48,33 +50,30 @@ export namespace ApiTypes {
 		hasVideo: boolean;
 	}
 
-	export type TLatestLaunchSummary = TStatusResponseType<{
+	type TSingleLaunchSummary = {
 		id: string;
 		missionName: string;
 		missionDate: string;
 		flightNumber: number;
-	}>
+		hasCrew: boolean;
+	}
 
-	export type TNextLaunchSummary = TStatusResponseType<{
-		id: string;
-		missionName: string;
-		missionDate: string;
-		flightNumber: number;
-	}>
+	export type TLatestLaunchSummary = TSingleLaunchSummary;
+	export type TNextLaunchSummary = TSingleLaunchSummary;
 
-	export type TPastLaunchSummary = TStatusResponseType<{
+	export type TPastLaunchSummary = {
 		totalFlights: number;
-		sucessfulFlights: number;
+		successfulFlights: number;
 		failedFlights: number;
-	}>
+	}
 
-	export type TUpcomingLaunchSummary = TStatusResponseType<{
+	export type TUpcomingLaunchSummary = {
 		totalFlights: number;
 		flightsPerMonth: {
 			currentMonth: number;
 			nextMonth: number;
 		}
-	}>
+	}
 
 	// Achar uma forma de reaproveitar o type do backend
 	export type TRawLaunch = {

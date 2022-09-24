@@ -1,9 +1,9 @@
-import { Text, ThemeIcon, Group } from "@mantine/core";
-import { RouteCard } from "./RouteCard";
+import { Group, Text, ThemeIcon } from "@mantine/core";
 import { IconCalendarEvent } from "@tabler/icons";
-import { TStaticPropsHomeResponse } from "../pages";
+import { ApiTypes } from "../types/api";
+import { RouteCard } from "./RouteCard";
 
-export const UpcomingLaunchesCard = ({ flightsPerMonth: { currentMonth, nextMonth }, totalFlights }: TStaticPropsHomeResponse["upcoming"]) => {
+export const UpcomingLaunchesCard = ({ flightsPerMonth: { currentMonth, nextMonth }, totalFlights }: ApiTypes.TUpcomingLaunchSummary) => {
 	return <RouteCard
 		image={{
 			src: "/upcoming_launches.jpg",

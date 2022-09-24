@@ -1,6 +1,6 @@
 import { Group, Text, ThemeIcon } from "@mantine/core";
 import { IconRocket } from "@tabler/icons";
-import { TStaticPropsHomeResponse } from "../pages";
+import { ApiTypes } from "../types/api";
 import { RouteCard } from "./RouteCard";
 
 const SuccessfulLaunches = ({ total }: { total: number }) => {
@@ -27,7 +27,7 @@ const FailedLaunches = ({ total }: { total: number }) => {
 	</>
 }
 
-export const PastLaunchCard = ({ failedFlights, sucessfulFlights, totalFlights }: TStaticPropsHomeResponse["past"]) => {
+export const PastLaunchCard = ({ failedFlights, successfulFlights, totalFlights }: ApiTypes.TPastLaunchSummary) => {
 	return <RouteCard
 		image={{
 			src: "/past_launches.jpg",
@@ -43,7 +43,7 @@ export const PastLaunchCard = ({ failedFlights, sucessfulFlights, totalFlights }
 		route="/launches/list/past"
 	>
 		<Group position="left" mt="xs" spacing="xs">
-			<SuccessfulLaunches total={sucessfulFlights} />
+			<SuccessfulLaunches total={successfulFlights} />
 		</Group>
 		<Group position="left" mt="xs" spacing="xs">
 			<FailedLaunches total={failedFlights} />
