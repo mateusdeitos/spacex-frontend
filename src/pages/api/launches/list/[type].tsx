@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { api } from "../../../../services/api";
 import { ApiTypes } from "../../../../types/api";
-import { dateUTCToLocalString } from "../../../../../utils/date.formatter";
+import { dateUTCToLocalString } from "../../../../utils/date.formatter";
 
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

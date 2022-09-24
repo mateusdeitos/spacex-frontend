@@ -1,5 +1,5 @@
-import { api } from "../src/services/api";
-import { ApiTypes } from "../src/types/api";
+import { api } from "../services/api";
+import { ApiTypes } from "../types/api";
 
 export const iterateRequestWithPagination = async <T>(route: string, onIterate: (record: T, index: number) => void) => {
 	const limit = 100;
