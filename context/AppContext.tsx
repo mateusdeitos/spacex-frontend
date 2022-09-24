@@ -1,5 +1,5 @@
-import { useLocalStorage } from '@mantine/hooks';
-import { createContext, useCallback, useContext } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
+import { useCookie } from '../hooks/useCookie';
 
 type TAppState = {
 	theme: 'light' | 'dark';
@@ -16,18 +16,13 @@ const initialState: TAppState = {
 
 const AppContext = createContext<TAppContext>({} as TAppContext);
 export const AppContextConsumer = AppContext.Consumer;
+
 export const AppContextProvider = ({ children }) => {
-	const [theme, persistTheme] = useLocalStorage<TAppState["theme"]>({
-		key: "theme",
-		defaultValue: initialState.theme,
-		deserialize(value) {
-			try {
-				return JSON.parse(value);
-			} catch (error) {
-				return initialState.theme;
-			}
-		},
-	});
+	/**
+	 * Armazeno nos cookies pois caso contrário o dá um flicker na tela
+	 * https://github.com/mantinedev/mantine/discussions/1094
+	 */
+	const [theme, persistTheme] = useCookie<TAppState["theme"]>("theme", initialState.theme);
 
 	const toggleTheme = useCallback(() => {
 		persistTheme(theme === 'light' ? 'dark' : 'light');
