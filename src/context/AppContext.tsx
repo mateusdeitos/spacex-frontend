@@ -26,7 +26,7 @@ export const AppContextProvider = ({ children }) => {
 
 	const toggleTheme = useCallback(() => {
 		persistTheme(theme === 'light' ? 'dark' : 'light');
-	}, [theme])
+	}, [theme, persistTheme])
 
 	return (
 		<AppContext.Provider value={{ theme, toggleTheme }}>
