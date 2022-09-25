@@ -31,7 +31,7 @@ export const MediaSection = ({ media }: Pick<ApiTypes.TLaunchDetails, "media">) 
 	</SimpleGrid>
 }
 
-export const YoutubeMediaContent = ({ media }: Pick<ApiTypes.TLaunchDetails, "media">) => {
+export function YoutubeMediaContent({ media }: Pick<ApiTypes.TLaunchDetails, "media">) {
 	if (!hasYoutubeContent(media)) return null;
 
 	const { videoId } = media.youTube;
@@ -49,7 +49,8 @@ export const YoutubeMediaContent = ({ media }: Pick<ApiTypes.TLaunchDetails, "me
 	</Card>
 }
 
-export const RedditMediaContent = ({ media }: { media: ApiTypes.TLaunchDetails["media"] }) => {
+
+export function RedditMediaContent({ media }: { media: ApiTypes.TLaunchDetails["media"] }) {
 	if (!hasRedditContent(media)) return null;
 
 	const { reddit } = media;
@@ -72,3 +73,6 @@ export const RedditMediaContent = ({ media }: { media: ApiTypes.TLaunchDetails["
 		</List>
 	</Card>
 }
+
+YoutubeMediaContent.hasData = hasYoutubeContent;
+RedditMediaContent.hasData = hasRedditContent;

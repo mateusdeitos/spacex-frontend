@@ -16,17 +16,17 @@ export const MainSection = ({ ...props }: ApiTypes.TLaunchDetails) => {
 				{props.details && <CardSectionInfo title="Details" value={props.details} />}
 			</Group>
 		</CardSection>
-		<CardSection>
+		{YoutubeMediaContent.hasData(props.media) && <CardSection>
 			<CardSectionHeader title="Youtube" />
 			<YoutubeMediaContent media={props.media} />
-		</CardSection>
+		</CardSection>}
 		<CardSection>
 			<CardSectionHeader title="Crew" />
 			<CrewSection crew={props.crew} />
 		</CardSection>
-		<CardSection isLast>
+		{RedditMediaContent.hasData(props.media) && <CardSection>
 			<CardSectionHeader title="Reddit" />
 			<RedditMediaContent media={props.media} />
-		</CardSection>
+		</CardSection>}
 	</Card>
 }

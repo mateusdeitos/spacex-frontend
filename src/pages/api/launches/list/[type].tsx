@@ -24,7 +24,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				missionDate: launch?.date_utc ? dateUTCToLocalString(launch.date_utc) : "",
 				flightNumber: launch.flight_number ?? 0,
 				success: !!launch?.success,
-				hasVideo: !!launch?.links?.youtube_id
+				hasVideo: !!launch?.links?.youtube_id,
+				hasCrew: !!launch?.crew?.length,
 			}
 		});
 

@@ -2,8 +2,9 @@ import { Card, Group, Text } from "@mantine/core";
 import { NextLink } from "@mantine/next";
 import { TListType } from "../../pages/launches/list/[type]";
 import { ApiTypes } from "../../types/api";
-import { Failed, Successful } from "./BadgeStatus";
+import { BadgeStatus } from "./BadgeStatus";
 import { FlightNumberBadge } from "./FlightNumberBadge";
+import { HasCrewBadge } from "./HasCrewBadge";
 import { HasVideoBadge } from "./HasVideoBadge";
 
 export type TLaunchCardProps = ApiTypes.TListLaunchSummary & {
@@ -19,6 +20,7 @@ export function LaunchCard({
 	missionName,
 	success,
 	type,
+	hasCrew,
 }: TLaunchCardProps) {
 	return <Card component={NextLink} prefetch={false} href={`/launches/${id}`} sx={(theme) => ({
 		display: "flex",
@@ -43,9 +45,10 @@ export function LaunchCard({
 		<Group position="left">
 			<FlightNumberBadge>#{flightNumber}</FlightNumberBadge>
 			{type === 'past' ? (
-				success ? <Successful /> : <Failed />
+				<BadgeStatus status={success ? "success" : "failed"} />
 			) : null}
 			{hasVideo && <HasVideoBadge />}
+			{hasCrew && <HasCrewBadge />}
 		</Group>
 	</Card>
 }

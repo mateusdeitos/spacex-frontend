@@ -50,10 +50,6 @@ export const getStaticProps: GetStaticProps<ApiTypes.TLaunchDetails> = async ({ 
 	if (!id || typeof id !== 'string') {
 		return {
 			notFound: true,
-			redirect: {
-				destination: '/',
-				statusCode: 301
-			}
 		}
 	}
 
@@ -67,9 +63,6 @@ export const getStaticProps: GetStaticProps<ApiTypes.TLaunchDetails> = async ({ 
 
 	return {
 		notFound: true,
-		redirect: {
-			destination: '/',
-		}
 	}
 
 }

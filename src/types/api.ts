@@ -48,6 +48,7 @@ export namespace ApiTypes {
 		flightNumber: number;
 		success: boolean;
 		hasVideo: boolean;
+		hasCrew: boolean;
 	}
 
 	type TSingleLaunchSummary = {
