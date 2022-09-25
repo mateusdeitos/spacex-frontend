@@ -13,15 +13,13 @@ export const CrewSection = ({ crew }: { crew: ApiTypes.TLaunchDetails["crew"] })
 export const EmptySection = () => {
 	return <Card shadow="sm" p="md" radius="sm">
 		<Card.Section mb="xl">
-			<Text align="center">No crew members on this mission</Text>
+			<Text align="center" size="lg">No crew members on this mission ☹️</Text>
 			<Image
 				p="sm"
 				radius="sm"
 				src="/empty-crew-section.svg"
 				alt="no crew members"
 				title="no crew members"
-				// width="20%"
-				height={300}
 				mx="auto"
 				fit="contain"
 				sx={{
