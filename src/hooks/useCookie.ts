@@ -1,6 +1,9 @@
 import CookieManager from 'js-cookie'
 import { useState, useCallback } from 'react';
 
+/**
+ * Obtém e atualiza um cookie
+ */
 export const useCookie = <T extends string>(key: string, defaultValue: T) => {
 	const [value, setValue] = useState<T>(() => {
 		return CookieManager.get(key) as T ?? defaultValue;

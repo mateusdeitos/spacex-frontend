@@ -24,7 +24,10 @@ export default function Details({ ...props }: ApiTypes.TLaunchDetails) {
 	)
 }
 
-
+/**
+ * Por padrão gero as páginas de detalhes para o último e para o próximo lançamento
+ * durante o build da aplicação
+ */
 export const getStaticPaths: GetStaticPaths = async () => {
 	const launches = await Promise.all([
 		fetchLatestLaunch(),

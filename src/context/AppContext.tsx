@@ -19,7 +19,7 @@ export const AppContextConsumer = AppContext.Consumer;
 
 export const AppContextProvider = ({ children }) => {
 	/**
-	 * Armazeno nos cookies pois caso contrário o dá um flicker na tela
+	 * Armazeno nos cookies pois caso contrário dá um flash na tela as vezes
 	 * https://github.com/mantinedev/mantine/discussions/1094
 	 */
 	const [theme, persistTheme] = useCookie<TAppState["theme"]>("theme", initialState.theme);
