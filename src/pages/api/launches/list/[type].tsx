@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 		const { limit, offset, type } = req.query;
 
-		const { data } = await api.get<ApiTypes.TPaginatedResult<ApiTypes.TRawLaunch>>(`/launches/${type}`, {
+		const { data } = await api.get<ApiTypes.TPaginatedResult<ApiTypes.TRawLaunch>>(`/v1/launches/${type}`, {
 			params: {
 				limit,
 				offset,

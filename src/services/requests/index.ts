@@ -5,7 +5,7 @@ import { api } from "../api";
 
 export async function fetchLaunchDetails(id: string): Promise<ApiTypes.TStatusResponseType<ApiTypes.TLaunchDetails>> {
 	try {
-		const { data } = await api.get<ApiTypes.TLaunchDetails>(`/launches/one/${id}`);
+		const { data } = await api.get<ApiTypes.TLaunchDetails>(`/v1/launches/one/${id}`);
 
 		return {
 			...data,
@@ -19,7 +19,7 @@ export async function fetchLaunchDetails(id: string): Promise<ApiTypes.TStatusRe
 
 export async function fetchLatestLaunch(): Promise<ApiTypes.TStatusResponseType<ApiTypes.TLatestLaunchSummary>> {
 	try {
-		const { data } = await api.get<ApiTypes.TLatestLaunchSummary>("/launches/latest");
+		const { data } = await api.get<ApiTypes.TLatestLaunchSummary>("/v1/launches/latest");
 
 		return {
 			...data,
@@ -35,7 +35,7 @@ export async function fetchLatestLaunch(): Promise<ApiTypes.TStatusResponseType<
 
 export async function fetchNextLaunch(): Promise<ApiTypes.TStatusResponseType<ApiTypes.TNextLaunchSummary>> {
 	try {
-		const { data } = await api.get<ApiTypes.TNextLaunchSummary>("/launches/next");
+		const { data } = await api.get<ApiTypes.TNextLaunchSummary>("/v1/launches/next");
 
 		return {
 			...data,
@@ -51,7 +51,7 @@ export async function fetchNextLaunch(): Promise<ApiTypes.TStatusResponseType<Ap
 
 export async function fetchPastLaunch(): Promise<ApiTypes.TStatusResponseType<ApiTypes.TPastLaunchSummary>> {
 	try {
-		const { data } = await api.get<ApiTypes.TPastLaunchSummary>("/launches/summary/past");
+		const { data } = await api.get<ApiTypes.TPastLaunchSummary>("/v1/launches/summary/past");
 
 		return {
 			...data,
@@ -66,7 +66,7 @@ export async function fetchPastLaunch(): Promise<ApiTypes.TStatusResponseType<Ap
 
 export async function fetchUpcomingLaunch(): Promise<ApiTypes.TStatusResponseType<ApiTypes.TUpcomingLaunchSummary>> {
 	try {
-		const { data } = await api.get<ApiTypes.TUpcomingLaunchSummary>("/launches/summary/upcoming");
+		const { data } = await api.get<ApiTypes.TUpcomingLaunchSummary>("/v1/launches/summary/upcoming");
 
 		return {
 			...data,
